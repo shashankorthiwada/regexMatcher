@@ -31,18 +31,24 @@ public class RegexMatchController
                 String inputPattern = reqWrapper.getRegex();
                 Pattern pattern = Pattern.compile(inputPattern);
                 Matcher matcher = pattern.matcher(reqWrapper.getTextBody());
-                if (matcher.find())
+                boolean isAlreadyFound = false;
+                while (matcher.find())
                 {
                     // If Match is Found setting the First Matched Value in the Match and Setting Error as False
                     response.setMatch(matcher.group(0));
                     response.setError(false);
+                    isAlreadyFound = true;
+                    matcher.reset();
+
                 }
-                else
+                if (!isAlreadyFound)
                 {
                     // If Match Not Found then Setting Match as Null and Error as False
                     response.setMatch(null);
                     response.setError(false);
+                    matcher.reset();
                 }
+
             }
         }
         catch (PatternSyntaxException exception)
