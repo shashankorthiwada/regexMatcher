@@ -46,7 +46,6 @@ public class RegexMatchController
                     // If Match Not Found then Setting Match as Null and Error as False
                     response.setMatch(null);
                     response.setError(false);
-                    matcher.reset();
                 }
 
             }
